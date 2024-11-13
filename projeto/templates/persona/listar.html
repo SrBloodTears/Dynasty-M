@@ -7,10 +7,9 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-
 <style>
     .card {
-        border: 1px solid #000; /* Define uma borda preta */
+        border: 1px solid #000;
     }
     .btn-container {
         display: flex;
@@ -20,43 +19,49 @@
 </style>
 
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Lista de Personagens da MARVEL com nome no SERASA</h2>
+    <h2 class="text-center mb-4">Lista de Personagens</h2>
 
     <div class="row">
         
-        {% for persona in personas %}
+        {% for persona in personagens %}
         
         <div class="col-md-4 mb-4">
             <div class="shadow card h-100">
-
                 
                 {% if persona.foto %}
                 <img src="{{ persona.foto.url }}" class="card-img-top" alt="Foto do {{ persona.nome }}">
                 {% else %}
-                Personagem sem foto
+                <div class="card-img-top text-center p-4">Personagem sem foto</div>
                 {% endif %}
                 
                 <div class="card-body">
                     <h5 class="card-title">{{ persona.get_alinhamento_display }} - {{ persona.nome }}</h5>
-                    <p class="card-text"><strong>Grupo:</strong> {{ veiculo.get_grupo_display }}</p>
-                    <p class="card-text"><strong>Raça:</strong> {{ veiculo.get_raca_display }}</p>
-                    <p class="card-text"><strong>Poderes:</strong> {{ veiculo.poderes }}</p>
-                    <p class="card-text"><strong>ID:</strong> {{ veiculo.id }}</p>
+                    <p class="card-text"><strong>Grupo:</strong> {{ persona.get_grupo_display }}</p>
+                    <p class="card-text"><strong>Raça:</strong> {{ persona.get_raca_display }}</p>
+                    <p class="card-text"><strong>Poderes:</strong> 
+                        {% for poder in persona.poderes.all %}
+                            {{ poder.get_codigo_display }}{% if not forloop.last %}, {% endif %}
+                        {% empty %}
+                            Sem poderes
+                        {% endfor %}
+                    </p>
+                    <p class="card-text"><strong>ID:</strong> {{ persona.id }}</p>
 
                     <!-- Botões de editar e deletar -->
-                    <div class="d-flex justify-content-between">
-                        <a href="/veiculo/{{veiculo.id}}/" class="btn btn-primary">
-                            <i class="fa fa-edit"></i>
+                    <div class="btn-container">
+                        <a href="{% url 'editar-personagem' persona.id %}" class="btn btn-primary">
+                            <i class="fa fa-edit"></i> Editar
                         </a>
-                        <a href="/veiculo/deletar/{{veiculo.id}}" class="btn btn-danger">
-                            <i class="fa fa-trash"></i>
+                        <a href="{% url 'deletar-personagem' persona.id %}" class="btn btn-danger">
+                            <i class="fa fa-trash"></i> Deletar
                         </a>
                     </div>
                 </div>
             </div>
         </div>
+        
         {% empty %}
-        <p class="text-center">Nenhum veículo cadastrado.</p>
+        <p class="text-center">Nenhum personagem cadastrado.</p>
         {% endfor %}
     </div>
 </div>

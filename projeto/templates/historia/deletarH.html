@@ -1,0 +1,18 @@
+{% extends 'persona/base.html' %}
+{% load static %}
+
+{% block title %}Retiragem de Histórias{% endblock %}
+
+{% block content %}
+<form action="/historia/deletarA/{{object.pk}}" method="post">
+    {% csrf_token %}
+
+    <center>
+        <div class="alert alert-danger" role="alert">
+            <p>Tem certeza que deseja deletar a história "{{ object }}" ?</p>
+        </div>
+
+        <input type="submit" value="Confirmar" class="btn btn-danger" />
+    </center>
+</form>
+{% endblock %}

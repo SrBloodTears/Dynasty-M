@@ -9,7 +9,7 @@
     <link type="text/css" rel="stylesheet" href="{% static 'bootstrap-5.3.3/css/bootstrap.css' %}">
     <style>
         body {
-            background-color: #805fad;
+            background-color: red;
         }
         .navbar {
             margin-bottom: 20px;
@@ -18,7 +18,7 @@
             margin-left: 10px; /* Adiciona um pequeno espaço à esquerda */
         }
         .highlight {
-            color: purple; /* Define a cor roxa */
+            color: red; /* Define a cor roxa */
         }
         footer {
             background-color: #f8f9fa; /* Cor de fundo suave */
@@ -29,7 +29,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"> <span class="highlight">MARVEL QG</span> - Onde as historias começam</a>
+        <a class="navbar-brand" href="#"> <span class="highlight">MARVEL QG</span> - Onde as lendas surgem</a>
         <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -40,21 +40,22 @@
                 </li>
                 <!-- Dropdown Veículos -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="veiculosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="personasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Personagens
                     </a>
-                    <ul class="dropdown-menu" aria-labelledby="veiculosDropdown">
+                    <ul class="dropdown-menu" aria-labelledby="personasDropdown">
                         <li><a class="dropdown-item" href="{% url 'listar-personagens' %}">Meu Esquadrão</a></li>
                         <li><a class="dropdown-item" href="{% url 'criar-personagens' %}">Adicionar Personagem</a></li>
                     </ul>
                 </li>
-                <!-- Dropdown Anúncios -->
+                <!-- Dropdown Historias -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Histórias
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        
+                        <li><a class="dropdown-item" href="{% url 'listar-historias' %}">Meu Esquadrão</a></li>
+                        <li><a class="dropdown-item" href="{% url 'criar-historias' %}">Adicionar Personagem</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
