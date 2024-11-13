@@ -7,59 +7,69 @@
 <div class="container mt-5">
     <h2 class="text-center mb-4">Cadastrar Novo Personagem</h2>
 
-    <!-- Formulario com borda, padding e sombra -->
+    <!-- Formulário com borda, padding e sombra -->
     <div class="card p-4 shadow-lg">
-        <form action="/persona/novo/" method="post" enctype="multipart/form-data">
+        <form action="{% url 'criar-personagem' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
             <div class="row g-3">
-                <!-- Marca -->
+                <!-- Nome -->
                 <div class="col-md-6">
-                    <label for="marca" class="form-label">
-                        <i class="fas fa-car"></i> Marca
+                    <label for="nome" class="form-label">
+                        <i class="fas fa-user"></i> Nome
                     </label>
                     <div class="input-group">
-                        {{ form.marca }}
+                        {{ form.nome }}
                     </div>
                 </div>
 
-                <!-- Modelo -->
+                <!-- Grupo -->
                 <div class="col-md-6">
-                    <label for="modelo" class="form-label">
-                        <i class="fas fa-car-side"></i> Modelo
+                    <label for="grupo" class="form-label">
+                        <i class="fas fa-users"></i> Grupo
                     </label>
                     <div class="input-group">
-                        {{ form.modelo }}
+                        {{ form.grupo }}
                     </div>
                 </div>
 
-                <!-- Cor -->
+                <!-- Raça -->
                 <div class="col-md-6">
-                    <label for="cor" class="form-label">
-                        <i class="fas fa-palette"></i> Cor
+                    <label for="raca" class="form-label">
+                        <i class="fas fa-dragon"></i> Raça
                     </label>
                     <div class="input-group">
-                        {{ form.cor }}
+                        {{ form.raça }}
                     </div>
                 </div>
 
-                <!-- Combustível -->
+                <!-- Alinhamento -->
                 <div class="col-md-6">
-                    <label for="combustivel" class="form-label">
-                        <i class="fas fa-gas-pump"></i> Combustível
+                    <label for="alinhamento" class="form-label">
+                        <i class="fas fa-balance-scale"></i> Alinhamento
                     </label>
                     <div class="input-group">
-                        {{ form.combustivel }}
+                        {{ form.alinhamento }}
                     </div>
                 </div>
 
-                <!-- Ano -->
-                <div class="col-md-6">
-                    <label for="ano" class="form-label">
-                        <i class="fas fa-calendar-alt"></i> Ano
+                <!-- Descrição -->
+                <div class="col-md-12">
+                    <label for="descricao" class="form-label">
+                        <i class="fas fa-info-circle"></i> Descrição
                     </label>
                     <div class="input-group">
-                        {{ form.ano }}
+                        {{ form.descricao }}
+                    </div>
+                </div>
+
+                <!-- Poderes -->
+                <div class="col-md-12">
+                    <label for="poderes" class="form-label">
+                        <i class="fas fa-magic"></i> Poderes
+                    </label>
+                    <div class="input-group">
+                        {{ form.poderes }}
                     </div>
                 </div>
 
