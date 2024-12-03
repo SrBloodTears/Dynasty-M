@@ -16,6 +16,9 @@
         justify-content: space-between;
         margin-top: 10px;
     }
+    h2 {
+        color: white;
+    }
 </style>
 
 <div class="container mt-5">
@@ -36,23 +39,34 @@
                 
                 <div class="card-body">
                     <h5 class="card-title">{{ persona.get_alinhamento_display }} - {{ persona.nome }}</h5>
-                    <p class="card-text"><strong>Grupo:</strong> {{ persona.get_grupo_display }}</p>
-                    <p class="card-text"><strong>Raça:</strong> {{ persona.get_raca_display }}</p>
+                    <p class="card-text"><strong>Grupos:</strong> 
+                        {% for grupo in persona.grupos.all %}
+                            {{ grupo.get_nome_display }}{% if not forloop.last %}, {% endif %}
+                        {% empty %}
+                            Sem grupos
+                        {% endfor %}
+                    </p>
+                    <p class="card-text"><strong>Raça:</strong> {{ persona.get_raça_display }}</p>
                     <p class="card-text"><strong>Poderes:</strong> 
                         {% for poder in persona.poderes.all %}
-                            {{ poder.get_codigo_display }}{% if not forloop.last %}, {% endif %}
+                            {{ poder.get_nome_display }}{% if not forloop.last %}, {% endif %}
                         {% empty %}
                             Sem poderes
                         {% endfor %}
                     </p>
+                    
+                    <p class="card-text"><strong>Pontos de Combate:</strong> {{ persona.pontosDeCombate }}</p>
+                    <p class="card-text"><strong>Rank:</strong> {{ persona.get_rank_display }}</p>
+                    <p class="card-text"><strong>Criador:</strong> {{ persona.criador }}</p>
+                    <p class="card-text"><strong>Descrição:</strong> {{ persona.descricao }}</p>
                     <p class="card-text"><strong>ID:</strong> {{ persona.id }}</p>
 
                     <!-- Botões de editar e deletar -->
                     <div class="btn-container">
-                        <a href="{% url 'editar-personagem' persona.id %}" class="btn btn-primary">
+                        <a href="{% url 'editar-personagens' persona.id %}" class="btn btn-primary">
                             <i class="fa fa-edit"></i> Editar
                         </a>
-                        <a href="{% url 'deletar-personagem' persona.id %}" class="btn btn-danger">
+                        <a href="{% url 'deletar-personagens' persona.id %}" class="btn btn-danger">
                             <i class="fa fa-trash"></i> Deletar
                         </a>
                     </div>

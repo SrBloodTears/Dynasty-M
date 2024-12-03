@@ -49,6 +49,7 @@ OPCOES_GRUPOS = (
     (48, 'IRMÃOS DA ESPADA'),
     (49, 'A CABALA'),
     (50, 'VINGADORES SOMBRIOS'),
+    (51, 'SOLITARIO')
 )
 
 
@@ -93,7 +94,26 @@ OPCOES_ALINHAMENTOS = (
     (3, 'ANTI HEROI'),
     (4, 'NEUTRO'),
     (5, 'CAOTICO'),
-    (6, 'ORDEM')
+    (6, 'ORDEIRA'),
+    (7, 'SEM ALINHAMENTO')
+)
+
+
+OPCOES_RANKS = (
+    (1, 'CIVIL'),
+    (2, 'AGENTE TREINADO'),
+    (3, 'AMEACA DA VIZINHANCA'),
+    (4, 'ARRASA QUARTEIRAO'),
+    (5, 'CIDADE EM PERIGO'),
+    (6, 'DIVINO'),
+    (7, 'ARAUTO COSMICO'),
+    (8, 'FIM DO MUNDO'),
+    (9, 'DEVORADOR DE PLANETAS'),
+    (10, 'DESTRUIDOR DO UNIVERSO'),
+    (11, 'PERIGO MULTIVERSAL'),
+    (12, 'ABSTRATO'),
+    (13, 'ONIPOTENTE'),
+    (14, 'DESCONHECIDO'),
 )
 
 
@@ -198,4 +218,5 @@ OPCOES_PODERES = (
     (98, 'MANIPULAÇÃO DE PESADELOS'),
     (99, 'PRESENÇA HIPNÓTICA'),
     (100, 'EMPATIA SOBRENATURAL'),
+    (101, 'SEM PODERES')
 )

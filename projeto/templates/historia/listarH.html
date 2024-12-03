@@ -1,7 +1,7 @@
 {% extends 'persona/base.html' %}
 {% load static %}
 
-{% block title %}Listagem de Personagens{% endblock %}
+{% block title %}Listagem de Historias{% endblock %}
 
 {% block content %}
 
@@ -10,45 +10,48 @@
 
 <style>
     .card {
-        border: 1px solid #000; /* Define uma borda preta */
+        border: 1px solid #000;
     }
     .btn-container {
         display: flex;
         justify-content: space-between;
         margin-top: 10px;
     }
+    h2 {
+        color: white;
+    }
 </style>
 
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Lista de Personagens da MARVEL com nome no SERASA</h2>
+    <h2 class="text-center mb-4">Lista de suas Histórias</h2>
 
     <div class="row">
         
-        {% for persona in personas %}
+        {% for historia in historias %}
         
         <div class="col-md-4 mb-4">
             <div class="shadow card h-100">
 
                 
-                {% if persona.foto %}
-                <img src="{{ persona.foto.url }}" class="card-img-top" alt="Foto do {{ persona.nome }}">
+                {% if historia.foto %}
+                <img src="{{ historia.foto.url }}" class="card-img-top" alt="Foto do {{ historia.nome }}">
                 {% else %}
-                Personagem sem foto
+                História sem capa
                 {% endif %}
                 
                 <div class="card-body">
-                    <h5 class="card-title">{{ persona.get_alinhamento_display }} - {{ persona.nome }}</h5>
+                    <h5 class="card-title">{{ historia.nome }}</h5>
                     <p class="card-text"><strong>Grupo:</strong> {{ veiculo.get_grupo_display }}</p>
                     <p class="card-text"><strong>Raça:</strong> {{ veiculo.get_raca_display }}</p>
-                    <p class="card-text"><strong>Poderes:</strong> {{ veiculo.poderes }}</p>
-                    <p class="card-text"><strong>ID:</strong> {{ veiculo.id }}</p>
+                    <p class="card-text"><strong>Personagens:</strong> {{ historia.personagens }}</p>
+                    <p class="card-text"><strong>ID:</strong> {{ historia.id }}</p>
 
                     <!-- Botões de editar e deletar -->
                     <div class="d-flex justify-content-between">
-                        <a href="/veiculo/{{veiculo.id}}/" class="btn btn-primary">
+                        <a href="/persona/{{persona.id}}/" class="btn btn-primary">
                             <i class="fa fa-edit"></i>
                         </a>
-                        <a href="/veiculo/deletar/{{veiculo.id}}" class="btn btn-danger">
+                        <a href="/persona/deletar/{{persona.id}}" class="btn btn-danger">
                             <i class="fa fa-trash"></i>
                         </a>
                     </div>
@@ -56,7 +59,7 @@
             </div>
         </div>
         {% empty %}
-        <p class="text-center">Nenhum veículo cadastrado.</p>
+        <p class="text-center">Nenhuma história cadastrada.</p>
         {% endfor %}
     </div>
 </div>

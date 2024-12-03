@@ -1,0 +1,111 @@
+{% extends 'persona/base.html' %}
+{% load static %}
+
+{% block title %}Edição do personagem{% endblock %}
+
+{% block content %}
+
+<form action="/persona/{{object.pk}}/" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="row g-3">
+        <!-- Nome -->
+        <div class="col-md-6">
+            <label for="nome" class="form-label">
+                <i class="fas fa-user"></i> Nome
+            </label>
+            <div class="input-group">
+                {{ form.nome }}
+            </div>
+        </div>
+
+        <!-- Grupos -->
+        <div class="col-md-6">
+            <label for="grupos" class="form-label">
+                <i class="fas fa-users"></i> Grupos
+            </label>
+            <div class="input-group">
+                {{ form.grupos }}
+            </div>
+        </div>
+
+        <!-- Raça -->
+        <div class="col-md-6">
+            <label for="raça" class="form-label">
+                <i class="fas fa-dragon"></i> Raça
+            </label>
+            <div class="input-group">
+                {{ form.raça }}
+            </div>
+        </div>
+
+        <!-- Alinhamento -->
+        <div class="col-md-6">
+            <label for="alinhamento" class="form-label">
+                <i class="fas fa-balance-scale"></i> Alinhamento
+            </label>
+            <div class="input-group">
+                {{ form.alinhamento }}
+            </div>
+        </div>
+
+        <!-- Descrição -->
+        <div class="col-md-12">
+            <label for="descricao" class="form-label">
+                <i class="fas fa-info-circle"></i> Descrição
+            </label>
+            <div class="input-group">
+                {{ form.descricao }}
+            </div>
+        </div>
+
+        <!-- Poderes -->
+        <div class="col-md-12">
+            <label for="poderes" class="form-label">
+                <i class="fas fa-magic"></i> Poderes
+            </label>
+            <div class="input-group">
+                {{ form.poderes }}  <!-- Este renderiza os checkboxes automaticamente -->
+            </div>
+        </div>
+
+
+        <!-- Foto -->
+        <div class="col-md-6">
+            <label for="foto" class="form-label">
+                <i class="fas fa-camera"></i> Foto
+            </label>
+            <div class="input-group">
+                {{ form.foto }}
+            </div>
+        </div>
+
+        <!-- Pontos de Combate -->
+        <div class="col-md-6">
+            <label for="pontosDeCombate" class="form-label">
+                <i class="fas fa-fist-raised"></i> Pontos de Combate
+            </label>
+            <div class="input-group">
+                {{ form.pontosDeCombate }}
+            </div>
+        </div>
+
+        <!-- Criador -->
+        <div class="col-md-6">
+            <label for="criador" class="form-label">
+                <i class="fas fa-user-edit"></i> Criador
+            </label>
+            <div class="input-group">
+                {{ form.criador }}
+            </div>
+        </div>
+    </div>
+
+
+            <div class="d-flex justify-content-center mt-5">
+                <button type="submit" class="btn btn-success btn-lg">
+                    <i class="fas fa-check-circle"></i> Atualizar
+                </button>
+            </div>
+
+{% endblock %}

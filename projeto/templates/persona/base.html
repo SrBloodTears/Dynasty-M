@@ -29,7 +29,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#"> <span class="highlight">MARVEL QG</span> - Onde as lendas surgem</a>
+        <a class="navbar-brand" href="#"> <span class="highlight">Dinastia M</span> - Onde as lendas surgem e suas historias são contadas</a>
         <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -38,7 +38,7 @@
                 <li class="nav-item">
                     <a class="nav-link">Home</a>
                 </li>
-                <!-- Dropdown Veículos -->
+                <!-- Dropdown de Personagens -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="personasDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Personagens
@@ -54,15 +54,19 @@
                         Histórias
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="{% url 'listar-historias' %}">Meu Esquadrão</a></li>
-                        <li><a class="dropdown-item" href="{% url 'criar-historias' %}">Adicionar Personagem</a></li>
+                        <li><a class="dropdown-item" href="{% url 'listar-historias' %}">Minha biblioteca</a></li>
+                        <li><a class="dropdown-item" href="{% url 'criar-historias' %}">Adicionar historias</a></li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link">Perfil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Perfil
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>
@@ -79,11 +83,11 @@
         <div class="container">
             <div class="row">
                 <div class="col text-center">
-                    <h5>Sobre os Decepticons</h5>
+                    <h5>Sobre Marvel QG</h5>
                     <p>
-                        Os Decepticons são uma facção de poderosos robôs que se transformam e lutam pela dominação. 
-                        Liderados por Megatron, eles são conhecidos por sua força, estratégia e desejo de conquistar o universo.
-                        Obedecer aos Decepticons é se alinhar ao poder e à verdadeira ordem galáctica.
+                        Marvel QG: Seu universo Marvel personalizado. Crie sua própria enciclopédia de super-heróis e vilões. 
+                        Organize suas histórias favoritas, compare os poderes dos personagens e construa seu próprio ranking de força. 
+                        Tudo em um só lugar e do seu jeito!
                     </p>
                 </div>
             </div>

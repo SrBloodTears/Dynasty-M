@@ -9,7 +9,7 @@
 
     <!-- Formulário com borda, padding e sombra -->
     <div class="card p-4 shadow-lg">
-        <form action="{% url 'criar-personagem' %}" method="post" enctype="multipart/form-data">
+        <form action="{% url 'criar-personagens' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
             <div class="row g-3">
@@ -23,19 +23,19 @@
                     </div>
                 </div>
 
-                <!-- Grupo -->
+                <!-- Grupos -->
                 <div class="col-md-6">
-                    <label for="grupo" class="form-label">
-                        <i class="fas fa-users"></i> Grupo
+                    <label for="grupos" class="form-label">
+                        <i class="fas fa-users"></i> Grupos
                     </label>
                     <div class="input-group">
-                        {{ form.grupo }}
+                        {{ form.grupos }}
                     </div>
                 </div>
 
                 <!-- Raça -->
                 <div class="col-md-6">
-                    <label for="raca" class="form-label">
+                    <label for="raça" class="form-label">
                         <i class="fas fa-dragon"></i> Raça
                     </label>
                     <div class="input-group">
@@ -69,9 +69,10 @@
                         <i class="fas fa-magic"></i> Poderes
                     </label>
                     <div class="input-group">
-                        {{ form.poderes }}
+                        {{ form.poderes }}  <!-- Este renderiza os checkboxes automaticamente -->
                     </div>
                 </div>
+
 
                 <!-- Foto -->
                 <div class="col-md-6">
@@ -80,6 +81,26 @@
                     </label>
                     <div class="input-group">
                         {{ form.foto }}
+                    </div>
+                </div>
+
+                <!-- Pontos de Combate -->
+                <div class="col-md-6">
+                    <label for="pontosDeCombate" class="form-label">
+                        <i class="fas fa-fist-raised"></i> Pontos de Combate
+                    </label>
+                    <div class="input-group">
+                        {{ form.pontosDeCombate }}
+                    </div>
+                </div>
+
+                <!-- Criador -->
+                <div class="col-md-6">
+                    <label for="criador" class="form-label">
+                        <i class="fas fa-user-edit"></i> Criador
+                    </label>
+                    <div class="input-group">
+                        {{ form.criador }}
                     </div>
                 </div>
             </div>

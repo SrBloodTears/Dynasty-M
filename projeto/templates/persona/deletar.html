@@ -1,0 +1,18 @@
+{% extends 'persona/base.html' %}
+{% load static %}
+
+{% block title %}Listagem de Personagens{% endblock %}
+
+{% block content %}
+<form action="/persona/deletar/{{object.pk}}" method="post">
+    {% csrf_token %}
+
+    <center>
+        <div class="alert alert-danger" role="alert">
+            <p>Tem certeza que deseja deletar este personagem "{{ object }}" ?</p>
+        </div>
+
+        <input type="submit" value="Confirmar" class="btn btn-danger" />
+    </center>
+</form>
+{% endblock %}

@@ -1,20 +1,29 @@
 from django.contrib import admin
-from persona.models import Personagem, Poder  # Importa o modelo Personagem e Poder
+from persona.models import Personagem, Poder, Grupo
 
 @admin.register(Personagem)
 class PersonagemAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'grupo', 'raça', 'alinhamento')  # Colunas exibidas no admin
-    search_fields = ('nome',)  # Barra de pesquisa pelo nome
-    list_filter = ('grupo', 'raça', 'alinhamento')  # Filtros laterais para grupo, raça e alinhamento
-    filter_horizontal = ('poderes',)  # Configuração para seleção múltipla de poderes
+    list_display = ('id', 'nome', 'get_grupos', 'raça', 'alinhamento', 'rank')
+    search_fields = ('nome',)
+    list_filter = ('raça', 'alinhamento', 'rank')
+    filter_horizontal = ('grupos', 'poderes')
 
     fieldsets = (
         (None, {
-            'fields': ('nome', 'grupo', 'raça', 'alinhamento', 'descricao', 'foto', 'poderes')
+            'fields': ('nome', 'grupos', 'raça', 'alinhamento', 'descricao', 'foto', 'poderes', 'pontosDeCombate', 'criador')
         }),
     )
 
+    def get_grupos(self, obj):
+        return ", ".join([grupo.get_nome_display() for grupo in obj.grupos.all()])
+    get_grupos.short_description = "Grupos"
+
 @admin.register(Poder)
 class PoderAdmin(admin.ModelAdmin):
-    list_display = ('codigo', 'descricao')  # Exibe código e descrição do poder
-    search_fields = ('descricao',)  # Barra de pesquisa pela descrição
+    list_display = ('id', 'nome')
+    search_fields = ('nome',)
+
+@admin.register(Grupo)
+class GrupoAdmin(admin.ModelAdmin):
+    list_display = ('id', 'nome')
+    search_fields = ('nome',)
