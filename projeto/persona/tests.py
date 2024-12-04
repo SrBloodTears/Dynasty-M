@@ -23,7 +23,7 @@ class TestesModelPersonagem(TestCase):
             nome="Test Hero",
             descricao="Um personagem de teste",
             pontosDeCombate=450,  
-            raça=1,
+            raca=1,
             alinhamento=2,
             criador="Stan lee",
             usuario=None
@@ -60,14 +60,14 @@ class TestesViewListarPersonagens(TestCase):
             nome="Heroi1", 
             usuario=self.user, 
             favorito=True,
-            raça=1,  
+            raca=1,  
             alinhamento=2
         )
         self.personagem2 = Personagem.objects.create(
             nome="Heroi2", 
             usuario=self.user, 
             favorito=False,
-            raça=1,  
+            raca=1,  
             alinhamento=2
         )
 
@@ -91,15 +91,14 @@ class TestesViewCriarPersonagens(TestCase):
         self.url = reverse('criar-personagens')
 
         # Criação de instâncias de Poder e Grupo
-        self.poder = Poder.objects.create(nome=1)  # Substitua 1 por um valor válido em OPCOES_PODERES
-        self.grupo = Grupo.objects.create(nome=1)  # Substitua 1 por um valor válido em OPCOES_GRUPOS
+        self.poder = Poder.objects.create(nome=1)  
+        self.grupo = Grupo.objects.create(nome=1)  
 
     def criar_imagem_simulada(self):
         """
         Cria uma imagem simulada para ser usada no teste.
         """
 
-        # Cria uma imagem vermelha de 100x100
         imagem = Image.new('RGB', (100, 100), color='red')
         arquivo = io.BytesIO()
         imagem.save(arquivo, format='JPEG')
@@ -119,7 +118,7 @@ class TestesViewCriarPersonagens(TestCase):
          'descricao': 'Descrição do novo herói',
          'poderes': [self.poder.id],
          'grupos': [self.grupo.id],
-         'raça': 1,
+         'raca': 1,
          'foto': imagem,
          'alinhamento': 1,
          'pontosDeCombate': 100,
@@ -133,14 +132,13 @@ class TestesViewCriarPersonagens(TestCase):
         if response.context and 'form' in response.context:
          print("Erros do formulário:", response.context['form'].errors)
 
-        self.assertEqual(response.status_code, 302)  # Espera redirecionamento
+        self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('listar-personagens'))
 
-        self.assertEqual(Personagem.objects.count(), 1)  # Verifica se o personagem foi criado
+        self.assertEqual(Personagem.objects.count(), 1)  
         personagem = Personagem.objects.first()
-        self.assertEqual(personagem.usuario, self.user)  # Verifica se o usuário foi atribuído corretamente
+        self.assertEqual(personagem.usuario, self.user)
 
-        # Verifica se o nome da foto contém 'test_image.jpg'
         
         self.assertTrue(personagem.foto.name.startswith('persona/fotos/test_image_'))
 
@@ -159,7 +157,7 @@ class TestesViewEditarPersonagens(TestCase):
             nome="Test Hero", 
             descricao="Descrição do herói",
             pontosDeCombate=100, 
-            raça= 2,
+            raca= 2,
             alinhamento= 3,
             usuario=self.user
         )
@@ -187,7 +185,7 @@ def test_post(self):
         'descricao': 'Nova descrição',
         'poderes': [poder.id],
         'grupos': [grupo.id],
-        'raça': 1,
+        'raca': 1,
         'foto': imagem,  
         'alinhamento': 1,
         'criador': 'novo criador',
@@ -217,7 +215,7 @@ class TestesViewDeletarPersonagens(TestCase):
             nome="Personagem Teste", 
             descricao="Descrição do herói da Lua minguante",
             pontosDeCombate=100,
-            raça=1,
+            raca=1,
             alinhamento=1,
             criador="Criador Teste",
             usuario=self.user

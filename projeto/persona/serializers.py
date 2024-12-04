@@ -11,8 +11,11 @@ class SerializadorPersona(serializers.ModelSerializer):
     nome_raca = serializers.SerializerMethodField()
     poderes = serializers.SerializerMethodField()  # Campo para listar poderes
 
+
+    
     class Meta:
         model = Personagem
+        fields = ['id', 'nome', 'descricao', 'raca', 'alinhamento', 'pontosDeCombate', 'criador', 'favorito']
         exclude = []
 
     def get_nome_alinhamento(self, instancia):

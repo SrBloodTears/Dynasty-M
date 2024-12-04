@@ -19,7 +19,7 @@ class Personagem(models.Model):
     nome = models.CharField(max_length=100)
     descricao = models.CharField(max_length=10000)
     poderes = models.ManyToManyField(Poder, related_name='personagens')
-    raça = models.SmallIntegerField(choices=OPCOES_RACAS)
+    raca = models.SmallIntegerField(choices=OPCOES_RACAS)
     foto = models.ImageField(blank=True, null=True, upload_to='persona/fotos')
     alinhamento = models.SmallIntegerField(choices=OPCOES_ALINHAMENTOS)
     rank = models.SmallIntegerField(choices=OPCOES_RANKS, editable=False, default=1)
@@ -71,7 +71,7 @@ class Personagem(models.Model):
         return '{0} - {1} ({2} / {3} / {4} / {5} - {6} / {7})'.format(
             self.nome,
             self.get_alinhamento_display(),
-            self.get_raça_display(),
+            self.get_raca_display(),
             grupos,
             poderes,
             self.get_rank_display(),

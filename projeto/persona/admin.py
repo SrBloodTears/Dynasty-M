@@ -1,16 +1,18 @@
 from django.contrib import admin
 from persona.models import Personagem, Poder, Grupo
+from django.contrib import admin
+
 
 @admin.register(Personagem)
 class PersonagemAdmin(admin.ModelAdmin):
-    list_display = ('id', 'nome', 'get_grupos', 'raça', 'alinhamento', 'rank', 'favorito', 'usuario')
+    list_display = ('id', 'nome', 'get_grupos', 'raca', 'alinhamento', 'rank', 'favorito', 'usuario')
     search_fields = ('nome',)
-    list_filter = ('raça', 'alinhamento', 'rank')
+    list_filter = ('raca', 'alinhamento', 'rank')
     filter_horizontal = ('grupos', 'poderes')
 
     fieldsets = (
         (None, {
-            'fields': ('nome', 'grupos', 'raça', 'alinhamento', 'descricao', 'foto', 'poderes', 'pontosDeCombate', 'criador', 'favorito', 'usuario')
+            'fields': ('nome', 'grupos', 'raca', 'alinhamento', 'descricao', 'foto', 'poderes', 'pontosDeCombate', 'criador', 'favorito', 'usuario')
         }),
     )
 

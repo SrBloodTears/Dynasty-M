@@ -44,7 +44,7 @@
                             Sem grupos
                         {% endfor %}
                     </p>
-                    <p class="card-text"><strong>Raça:</strong> {{ persona.get_raça_display }}</p>
+                    <p class="card-text"><strong>Raça:</strong> {{ persona.get_raca_display }}</p>
                     <p class="card-text"><strong>Poderes:</strong> 
                         {% for poder in persona.poderes.all %}
                             {{ poder.get_nome_display }}{% if not forloop.last %}, {% endif %}
@@ -92,7 +92,7 @@
                             Sem grupos
                         {% endfor %}
                     </p>
-                    <p class="card-text"><strong>Raça:</strong> {{ persona.get_raça_display }}</p>
+                    <p class="card-text"><strong>Raça:</strong> {{ persona.get_raca_display }}</p>
                     <p class="card-text"><strong>Poderes:</strong> 
                         {% for poder in persona.poderes.all %}
                             {{ poder.get_nome_display }}{% if not forloop.last %}, {% endif %}

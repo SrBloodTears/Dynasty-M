@@ -5,7 +5,7 @@ from django import forms
 class FormularioPersona(forms.ModelForm):
     class Meta:
         model = Personagem
-        fields = ['nome', 'descricao', 'poderes', 'grupos', 'raça', 'foto', 'alinhamento', 'pontosDeCombate', 'criador', 'favorito']
+        fields = ['nome', 'descricao', 'poderes', 'grupos', 'raca', 'foto', 'alinhamento', 'pontosDeCombate', 'criador', 'favorito']
         widgets = {
             'poderes': forms.CheckboxSelectMultiple(),
             'grupos': forms.CheckboxSelectMultiple(),

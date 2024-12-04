@@ -19,8 +19,8 @@ class TestesModelHistoria(TestCase):
         self.client.force_login(self.user)
 
         # Criação de personagens para o campo ManyToMany
-        self.personagem1 = Personagem.objects.create(nome="Personagem 1", raça=1, alinhamento=1, pontosDeCombate=100)
-        self.personagem2 = Personagem.objects.create(nome="Personagem 2", raça=2, alinhamento=2, pontosDeCombate=200)
+        self.personagem1 = Personagem.objects.create(nome="Personagem 1", raca=1, alinhamento=1, pontosDeCombate=100)
+        self.personagem2 = Personagem.objects.create(nome="Personagem 2", raca=2, alinhamento=2, pontosDeCombate=200)
 
         # Criação da história
         self.historia = Historia.objects.create(
@@ -45,7 +45,7 @@ class TestesModelHistoria(TestCase):
         Testa se a data de lançamento da HQ é recente
         """
         data_atual = datetime.now().date()
-        limite_minimo = data_atual - timedelta(days=2 * 365)  # Aproximadamente 2 anos
+        limite_minimo = data_atual - timedelta(days=2 * 365)  
         data_lancamento = datetime.strptime(self.historia.data_de_lancamento, '%Y-%m-%d').date()
 
         self.assertGreaterEqual(data_lancamento, limite_minimo)
@@ -88,8 +88,8 @@ class TestesViewCriarHistorias(TestCase):
         self.client.force_login(self.user)
 
         # Criação de personagens para o campo ManyToMany
-        self.personagem1 = Personagem.objects.create(nome="Personagem 1", raça=1, alinhamento=1, pontosDeCombate=100)
-        self.personagem2 = Personagem.objects.create(nome="Personagem 2", raça=2, alinhamento=2, pontosDeCombate=200)
+        self.personagem1 = Personagem.objects.create(nome="Personagem 1", raca=1, alinhamento=1, pontosDeCombate=100)
+        self.personagem2 = Personagem.objects.create(nome="Personagem 2", raca=2, alinhamento=2, pontosDeCombate=200)
 
         # URL para criação de histórias
         self.url_criar = reverse('criar-historias')
@@ -147,7 +147,7 @@ class TestesViewEditarHistorias(TestCase):
         self.client.force_login(self.user)
         
         # Criação de personagens para o campo ManyToMany
-        self.personagem1 = Personagem.objects.create(nome="Personagem 1", raça=1, alinhamento=1, pontosDeCombate=100)
+        self.personagem1 = Personagem.objects.create(nome="Personagem 1", raca=1, alinhamento=1, pontosDeCombate=100)
         
         # Criação da instância de Historia para editar
         self.instancia = Historia.objects.create(
