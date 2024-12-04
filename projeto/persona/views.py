@@ -27,7 +27,6 @@ class ListarPersonagens(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        # Filtrar personagens favoritos e não favoritos pelo 'usuario' (campo ForeignKey)
         context['personas_favoritos'] = Personagem.objects.filter(favorito=True, usuario=self.request.user)
         context['outros_personas'] = Personagem.objects.filter(favorito=False, usuario=self.request.user)
         return context
