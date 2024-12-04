@@ -22,21 +22,19 @@
 </style>
 
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Lista de Personagens</h2>
+    <h2 class="text-center mb-4">Seu Esquadrão</h2>
 
+    {% if personas_favoritos %}
+    <h3 class="text-center mb-3">Favoritos</h3>
     <div class="row">
-        
-        {% for persona in personagens %}
-        
+        {% for persona in personas_favoritos %}
         <div class="col-md-4 mb-4">
             <div class="shadow card h-100">
-                
                 {% if persona.foto %}
                 <img src="{{ persona.foto.url }}" class="card-img-top" alt="Foto do {{ persona.nome }}">
                 {% else %}
                 <div class="card-img-top text-center p-4">Personagem sem foto</div>
                 {% endif %}
-                
                 <div class="card-body">
                     <h5 class="card-title">{{ persona.get_alinhamento_display }} - {{ persona.nome }}</h5>
                     <p class="card-text"><strong>Grupos:</strong> 
@@ -54,14 +52,11 @@
                             Sem poderes
                         {% endfor %}
                     </p>
-                    
                     <p class="card-text"><strong>Pontos de Combate:</strong> {{ persona.pontosDeCombate }}</p>
                     <p class="card-text"><strong>Rank:</strong> {{ persona.get_rank_display }}</p>
                     <p class="card-text"><strong>Criador:</strong> {{ persona.criador }}</p>
                     <p class="card-text"><strong>Descrição:</strong> {{ persona.descricao }}</p>
                     <p class="card-text"><strong>ID:</strong> {{ persona.id }}</p>
-
-                    <!-- Botões de editar e deletar -->
                     <div class="btn-container">
                         <a href="{% url 'editar-personagens' persona.id %}" class="btn btn-primary">
                             <i class="fa fa-edit"></i> Editar
@@ -73,10 +68,57 @@
                 </div>
             </div>
         </div>
-        
-        {% empty %}
-        <p class="text-center">Nenhum personagem cadastrado.</p>
         {% endfor %}
     </div>
+    {% endif %}
+
+    {% if outros_personas %}
+    <h3 class="text-center mb-3">Outros Personagens</h3>
+    <div class="row">
+        {% for persona in outros_personas %}
+        <div class="col-md-4 mb-4">
+            <div class="shadow card h-100">
+                {% if persona.foto %}
+                <img src="{{ persona.foto.url }}" class="card-img-top" alt="Foto do {{ persona.nome }}">
+                {% else %}
+                <div class="card-img-top text-center p-4">Personagem sem foto</div>
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ persona.get_alinhamento_display }} - {{ persona.nome }}</h5>
+                    <p class="card-text"><strong>Grupos:</strong> 
+                        {% for grupo in persona.grupos.all %}
+                            {{ grupo.get_nome_display }}{% if not forloop.last %}, {% endif %}
+                        {% empty %}
+                            Sem grupos
+                        {% endfor %}
+                    </p>
+                    <p class="card-text"><strong>Raça:</strong> {{ persona.get_raça_display }}</p>
+                    <p class="card-text"><strong>Poderes:</strong> 
+                        {% for poder in persona.poderes.all %}
+                            {{ poder.get_nome_display }}{% if not forloop.last %}, {% endif %}
+                        {% empty %}
+                            Sem poderes
+                        {% endfor %}
+                    </p>
+                    <p class="card-text"><strong>Pontos de Combate:</strong> {{ persona.pontosDeCombate }}</p>
+                    <p class="card-text"><strong>Rank:</strong> {{ persona.get_rank_display }}</p>
+                    <p class="card-text"><strong>Criador:</strong> {{ persona.criador }}</p>
+                    <p class="card-text"><strong>Descrição:</strong> {{ persona.descricao }}</p>
+                    <p class="card-text"><strong>ID:</strong> {{ persona.id }}</p>
+                    <div class="btn-container">
+                        <a href="{% url 'editar-personagens' persona.id %}" class="btn btn-primary">
+                            <i class="fa fa-edit"></i> Editar
+                        </a>
+                        <a href="{% url 'deletar-personagens' persona.id %}" class="btn btn-danger">
+                            <i class="fa fa-trash"></i> Deletar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 </div>
+
 {% endblock %}

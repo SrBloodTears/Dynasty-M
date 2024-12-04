@@ -19,7 +19,15 @@ class ListarPersonagens(LoginRequiredMixin, ListView):
     model = Personagem
     context_object_name = 'personagens'
     template_name = 'persona/listar.html'
-    paginate_by = 10  # Adiciona paginação, 10 itens por página
+    paginate_by = 10  
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Filtrar personagens favoritos e não favoritos pelo 'usuario' (campo ForeignKey)
+        context['personas_favoritos'] = Personagem.objects.filter(favorito=True, usuario=self.request.user)
+        context['outros_personas'] = Personagem.objects.filter(favorito=False, usuario=self.request.user)
+        return context
 
 class CriarPersonagens(LoginRequiredMixin, CreateView):
     """
@@ -29,8 +37,10 @@ class CriarPersonagens(LoginRequiredMixin, CreateView):
     form_class = FormularioPersona
     template_name = 'persona/novo.html'
     success_url = reverse_lazy('listar-personagens')
+    
 
     def form_valid(self, form):
+        form.save(request=self.request)
         messages.success(self.request, 'Personagem criado com sucesso!')
         return super().form_valid(form)
 

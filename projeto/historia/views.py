@@ -1,5 +1,5 @@
-from django.shortcuts import render
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, View
+from django.shortcuts import render
 from historia.models import Historia
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import FileResponse, Http404
@@ -9,11 +9,19 @@ from historia.form import FormularioHistoria
 
 class ListarHistorias(LoginRequiredMixin, ListView):
     """
-    View para listar as historias cadastrados.
+    View para listar as historias cadastradas.
     """
+
     model = Historia
     context_object_name = 'historias'
     template_name = 'historia/listarH.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        context['historias_favoritas'] = Historia.objects.filter(favorito=True, usuario=self.request.user)
+        context['outras_historias'] = Historia.objects.filter(favorito=False, usuario=self.request.user)
+        return context
 
 class CriarHistorias(LoginRequiredMixin, CreateView):
     """

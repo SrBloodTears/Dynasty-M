@@ -23,15 +23,14 @@
 </style>
 
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Lista de suas Histórias</h2>
-
+    <h2 class="text-center mb-4">Sua coleção de histórias</h2>
+    {% if historias_favoritas %}
+    <h3 class="text-center mb-3">Favoritas</h3>
     <div class="row">
-        
-        {% for historia in historias %}
-        
+        {% for historia in historias_favoritas %}
         <div class="col-md-4 mb-4">
             <div class="shadow card h-100">
-
+        
                 
                 {% if historia.foto %}
                 <img src="{{ historia.foto.url }}" class="card-img-top" alt="Foto do {{ historia.nome }}">
@@ -41,26 +40,91 @@
                 
                 <div class="card-body">
                     <h5 class="card-title">{{ historia.nome }}</h5>
-                    <p class="card-text"><strong>Grupo:</strong> {{ veiculo.get_grupo_display }}</p>
-                    <p class="card-text"><strong>Raça:</strong> {{ veiculo.get_raca_display }}</p>
-                    <p class="card-text"><strong>Personagens:</strong> {{ historia.personagens }}</p>
+                    <p class="card-text"><strong>Sipnose:</strong> {{ historia.descricao }}</p>
+                    <p class="card-text"><strong>Personagens:</strong> 
+                        {% for personagem in historia.personagens.all %}
+                            {{ personagem.nome }}{% if not forloop.last %}, {% endif %}
+                        {% empty %}
+                            Nenhum personagem relacionado
+                        {% endfor %}
+                    </p>
+                    <p class="card-text"><strong>Autor:</strong> {{ historia.autores}}</p>
+                    <p class="card-text"><strong>Ilustrador:</strong> {{ historia.ilustradores }}</p>
+                    <p class="card-text"><strong>Data de lançamento:</strong> {{ historia.data_de_lancamento }}</p>
                     <p class="card-text"><strong>ID:</strong> {{ historia.id }}</p>
-
+                    
+        
                     <!-- Botões de editar e deletar -->
                     <div class="d-flex justify-content-between">
-                        <a href="/persona/{{persona.id}}/" class="btn btn-primary">
+                        <a href="/historia/{{historia.id}}/" class="btn btn-primary">
                             <i class="fa fa-edit"></i>
                         </a>
-                        <a href="/persona/deletar/{{persona.id}}" class="btn btn-danger">
+                        <a href="/historia/deletarH/{{historia.id}}" class="btn btn-danger">
                             <i class="fa fa-trash"></i>
                         </a>
-                    </div>
-                </div>
+                    </div> <!-- Botões de editar e deletar -->
+        
+                </div> <!-- card body -->
+        
             </div>
+            
         </div>
-        {% empty %}
-        <p class="text-center">Nenhuma história cadastrada.</p>
         {% endfor %}
+        {% if historias_favoritas|length == 0 %}
+        <p class="text-center">Nenhuma história favorita encontrada.</p>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    <h3 class="text-center mb-3">Outras histórias</h3>
+    <div class="row">
+        {% for historia in outras_historias %}
+        <div class="col-md-4 mb-4">
+            <div class="shadow card h-100">
+        
+                
+                {% if historia.foto %}
+                <img src="{{ historia.foto.url }}" class="card-img-top" alt="Foto do {{ historia.nome }}">
+                {% else %}
+                História sem capa
+                {% endif %}
+                
+                <div class="card-body">
+                    <h5 class="card-title">{{ historia.nome }}</h5>
+                    <p class="card-text"><strong>Sipnose:</strong> {{ historia.descricao }}</p>
+                    <p class="card-text"><strong>Personagens:</strong> 
+                        {% for personagem in historia.personagens.all %}
+                            {{ personagem.nome }}{% if not forloop.last %}, {% endif %}
+                        {% empty %}
+                            Nenhum personagem relacionado
+                        {% endfor %}
+                    </p>
+                    <p class="card-text"><strong>Autor:</strong> {{ historia.autores}}</p>
+                    <p class="card-text"><strong>Ilustrador:</strong> {{ historia.ilustradores }}</p>
+                    <p class="card-text"><strong>Data de lançamento:</strong> {{ historia.data_de_lancamento }}</p>
+                    <p class="card-text"><strong>ID:</strong> {{ historia.id }}</p>
+                    
+        
+                    <!-- Botões de editar e deletar -->
+                    <div class="d-flex justify-content-between">
+                        <a href="/historia/{{historia.id}}/" class="btn btn-primary">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a href="/historia/deletarH/{{historia.id}}" class="btn btn-danger">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </div> <!-- Botões de editar e deletar -->
+        
+                </div> <!-- card body -->
+        
+            </div>
+            
+        </div>
+        {% endfor %}
+        {% if outras_historias|length == 0 %}
+        <p class="text-center">Nenhuma outra história encontrada.</p>
+        {% endif %}
     </div>
 </div>
+
 {% endblock %}

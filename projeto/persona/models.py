@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from persona.consts import *
 
 class Grupo(models.Model):
@@ -24,6 +25,11 @@ class Personagem(models.Model):
     rank = models.SmallIntegerField(choices=OPCOES_RANKS, editable=False, default=1)
     pontosDeCombate = models.IntegerField(default=0)
     criador = models.CharField(max_length=100, default="Criador desconhecido")
+    usuario = models.ForeignKey(User, related_name='personagens', on_delete=models.CASCADE, null=True, blank=True)
+    favorito = models.BooleanField(default=False)
+
+    class Meta:
+        verbose_name_plural = "Personagens"
 
     def save(self, *args, **kwargs):
         self.rank = self.definir_rank()

@@ -16,8 +16,8 @@ class HistoriaAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         """Associa automaticamente o usuário logado ao campo 'usuario'."""
-        if not obj.usuario_id:  # Verifica se o campo ainda não foi preenchido
-            obj.usuario = request.user  # Define o usuário logado como criador
+        if not obj.usuario_id:
+            obj.usuario = request.user
         super().save_model(request, obj, form, change)
 
     def get_autores(self, obj):

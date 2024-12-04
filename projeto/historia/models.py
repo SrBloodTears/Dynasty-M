@@ -11,6 +11,7 @@ class Historia(models.Model):
     foto = models.ImageField(blank=True, null=True, upload_to='historia/fotos')
     descricao = models.CharField(max_length=10000)
     data = models.DateTimeField(auto_now_add=True)
+    favorito = models.BooleanField(default=False)
     usuario = models.ForeignKey(User, related_name='historias_armazenadas', on_delete=models.CASCADE)
 
     def __str__(self):

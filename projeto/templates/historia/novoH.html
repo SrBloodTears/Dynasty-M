@@ -1,15 +1,15 @@
 {% extends 'persona/base.html' %}
 {% load static %}
 
-{% block title %}Adicionar Personagem{% endblock %}
+{% block title %}Adicionar História{% endblock %}
 
 {% block content %}
 <div class="container mt-5">
-    <h2 class="text-center mb-4">Cadastrar Novo Personagem</h2>
+    <h2 class="text-center mb-4">Cadastrar Nova História</h2>
 
     <!-- Formulário com borda, padding e sombra -->
     <div class="card p-4 shadow-lg">
-        <form action="{% url 'criar-personagens' %}" method="post" enctype="multipart/form-data">
+        <form action="{% url 'criar-historias' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
             <div class="row g-3">
@@ -26,50 +26,60 @@
                 <!-- Grupos -->
                 <div class="col-md-6">
                     <label for="grupos" class="form-label">
-                        <i class="fas fa-users"></i> Grupos
-                    </label>
-                    <div class="input-group">
-                        {{ form.grupos }}
-                    </div>
-                </div>
-
-                <!-- Raça -->
-                <div class="col-md-6">
-                    <label for="raça" class="form-label">
-                        <i class="fas fa-dragon"></i> Raça
-                    </label>
-                    <div class="input-group">
-                        {{ form.raça }}
-                    </div>
-                </div>
-
-                <!-- Alinhamento -->
-                <div class="col-md-6">
-                    <label for="alinhamento" class="form-label">
-                        <i class="fas fa-balance-scale"></i> Alinhamento
-                    </label>
-                    <div class="input-group">
-                        {{ form.alinhamento }}
-                    </div>
-                </div>
-
-                <!-- Descrição -->
-                <div class="col-md-12">
-                    <label for="descricao" class="form-label">
-                        <i class="fas fa-info-circle"></i> Descrição
+                        <i class="fas fa-users"></i> Descrição
                     </label>
                     <div class="input-group">
                         {{ form.descricao }}
                     </div>
                 </div>
 
+                <!-- Personagens -->
+                <div class="col-md-6">
+                    <label for="raça" class="form-label">
+                        <i class="fas fa-dragon"></i> Personagens
+                    </label>
+                    <div class="input-group">
+                        {{ form.personagens }}
+                    </div>
+                </div>
+
+                <!-- Autor -->
+                <div class="col-md-6">
+                    <label for="alinhamento" class="form-label">
+                        <i class="fas fa-balance-scale"></i> Autores
+                    </label>
+                    <div class="input-group">
+                        {{ form.autores }}
+                    </div>
+                </div>
+
+                <!-- Descrição -->
+                <div class="col-md-12">
+                    <label for="descricao" class="form-label">
+                        <i class="fas fa-info-circle"></i> Ilustradores
+                    </label>
+                    <div class="input-group">
+                        {{ form.ilustradores }}
+                    </div>
+                </div>
+
+                <!-- Favorito -->
+                <div class="col-md-12">
+                    <label for="descricao" class="form-label">
+                        <i class="fas fa-info-circle"></i> Favorito
+                    </label>
+                    <div class="input-group">
+                        {{ form.favorito }}
+                    </div>
+                </div>
+
                 <!-- Poderes -->
                 <div class="col-md-12">
                     <label for="poderes" class="form-label">
-                        <i class="fas fa-magic"></i> Poderes
+                        <i class="fas fa-magic"></i> Data de Lançamento
                     </label>
                     <div class="input-group">
-                        {{ form.poderes }}  <!-- Este renderiza os checkboxes automaticamente -->
+                        {{ form.data_de_lancamento }}
                     </div>
                 </div>
 
@@ -84,35 +94,7 @@
                     </div>
                 </div>
 
-                <!-- Pontos de Combate -->
-                <div class="col-md-6">
-                    <label for="pontosDeCombate" class="form-label">
-                        <i class="fas fa-fist-raised"></i> Pontos de Combate
-                    </label>
-                    <div class="input-group">
-                        {{ form.pontosDeCombate }}
-                    </div>
-                </div>
 
-                <!-- Criador -->
-                <div class="col-md-6">
-                    <label for="criador" class="form-label">
-                        <i class="fas fa-user-edit"></i> Criador
-                    </label>
-                    <div class="input-group">
-                        {{ form.criador }}
-                    </div>
-                </div>
-            </div>
-
-            <!-- Favorito -->
-            <div class="col-md-12">
-                <label for="descricao" class="form-label">
-                    <i class="fas fa-info-circle"></i> Favorito
-                </label>
-                <div class="input-group">
-                    {{ form.favorito }}
-                </div>
             </div>
 
             <div class="d-flex justify-content-center mt-5">
