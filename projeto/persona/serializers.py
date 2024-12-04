@@ -1,33 +1,32 @@
 from rest_framework import serializers
-from persona.models import Personagem
-
+from persona.models import Personagem, Grupo, Poder
 
 class SerializadorPersona(serializers.ModelSerializer):
-    """
-    Serializador para o model Personagem
-    """
-    nome_alinhamento = serializers.SerializerMethodField()
-    nome_grupos = serializers.SerializerMethodField()
-    nome_raca = serializers.SerializerMethodField()
-    poderes = serializers.SerializerMethodField()  # Campo para listar poderes
+    grupos = serializers.PrimaryKeyRelatedField(
+        many=True, queryset=Grupo.objects.all(), required=False
+    )
+    poderes = serializers.PrimaryKeyRelatedField(
+        many=True, queryset=Poder.objects.all(), required=False
+    )
 
-
-    
     class Meta:
         model = Personagem
-        fields = ['id', 'nome', 'descricao', 'raca', 'alinhamento', 'pontosDeCombate', 'criador', 'favorito']
-        exclude = []
+        fields = ['nome', 'descricao', 'raca', 'alinhamento', 'pontosDeCombate', 'criador', 'favorito', 'grupos', 'poderes']
 
-    def get_nome_alinhamento(self, instancia):
-        return instancia.get_alinhamento_display()
+    def create(self, validated_data):
+        grupos = validated_data.pop('grupos', [])
+        poderes = validated_data.pop('poderes', [])
+        personagem = Personagem.objects.create(**validated_data)
+        personagem.grupos.set(grupos)
+        personagem.poderes.set(poderes)
+        return personagem
 
-    def get_nome_grupos(self, instancia):
-        # Obtém os nomes dos grupos associados e os retorna como uma lista
-        return [grupo.nome for grupo in instancia.grupos.all()]
-
-    def get_nome_raca(self, instancia):
-        return instancia.get_raca_display()
-
-    def get_poderes(self, instancia):
-        # Obtém os nomes dos poderes associados e os retorna como uma lista
-        return [poder.nome for poder in instancia.poderes.all()]
+    def update(self, instance, validated_data):
+        grupos = validated_data.pop('grupos', [])
+        poderes = validated_data.pop('poderes', [])
+        instance.grupos.set(grupos)
+        instance.poderes.set(poderes)
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+        return instance

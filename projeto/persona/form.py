@@ -1,20 +1,37 @@
-from django.forms import ModelForm
-from persona.models import Personagem
 from django import forms
+from persona.models import Personagem, Grupo, Poder
 
 class FormularioPersona(forms.ModelForm):
+    grupos = forms.ModelMultipleChoiceField(
+        queryset=Grupo.objects.all(),
+        widget=forms.SelectMultiple(attrs={'class': 'form-select'}),
+        required=False,
+        label="Grupos"
+    )
+    poderes = forms.ModelMultipleChoiceField(
+        queryset=Poder.objects.all(),
+        widget=forms.SelectMultiple(attrs={'class': 'form-select'}),
+        required=False,
+        label="Poderes"
+    )
+
     class Meta:
         model = Personagem
         fields = ['nome', 'descricao', 'poderes', 'grupos', 'raca', 'foto', 'alinhamento', 'pontosDeCombate', 'criador', 'favorito']
-        widgets = {
-            'poderes': forms.CheckboxSelectMultiple(),
-            'grupos': forms.CheckboxSelectMultiple(),
-        }
-    
+
     def save(self, commit=True, request=None):
-        persona = super().save(commit=False)
+        """
+        Salva o formulário, atribuindo o usuário autenticado, se necessário, 
+        e garantindo que os campos ManyToMany sejam tratados corretamente.
+        """
+        instance = super().save(commit=False)
+
+        # Atribuir o usuário autenticado, se o request for passado
         if request:
-            persona.usuario = request.user  # Atribui o usuário logado ao campo 'usuario'
+            instance.usuario = request.user
+        
         if commit:
-            persona.save()
-        return persona
+            instance.save()  # Salva a instância do objeto para associar M2M corretamente
+            self.save_m2m()  # Salva os campos ManyToMany
+
+        return instance

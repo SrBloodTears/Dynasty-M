@@ -1,5 +1,6 @@
 {% extends 'persona/base.html' %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block title %}Adicionar Personagem{% endblock %}
 
@@ -11,111 +12,110 @@
     <div class="card p-4 shadow-lg">
         <form action="{% url 'criar-personagens' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
-
             <div class="row g-3">
                 <!-- Nome -->
                 <div class="col-md-6">
-                    <label for="nome" class="form-label">
+                    <label for="id_nome" class="form-label">
                         <i class="fas fa-user"></i> Nome
                     </label>
                     <div class="input-group">
-                        {{ form.nome }}
+                        {{ form.nome|add_class:"form-control" }}
                     </div>
                 </div>
 
-                <!-- Grupos -->
+                <!-- Grupos (Dropdown) -->
                 <div class="col-md-6">
-                    <label for="grupos" class="form-label">
+                    <label for="id_grupos" class="form-label">
                         <i class="fas fa-users"></i> Grupos
                     </label>
                     <div class="input-group">
-                        {{ form.grupos }}
+                        {{ form.grupos|add_class:"form-select" }}
                     </div>
                 </div>
 
                 <!-- Raça -->
                 <div class="col-md-6">
-                    <label for="raça" class="form-label">
+                    <label for="id_raca" class="form-label">
                         <i class="fas fa-dragon"></i> Raça
                     </label>
                     <div class="input-group">
-                        {{ form.raca }}
+                        {{ form.raca|add_class:"form-select" }}
                     </div>
                 </div>
 
                 <!-- Alinhamento -->
                 <div class="col-md-6">
-                    <label for="alinhamento" class="form-label">
+                    <label for="id_alinhamento" class="form-label">
                         <i class="fas fa-balance-scale"></i> Alinhamento
                     </label>
                     <div class="input-group">
-                        {{ form.alinhamento }}
+                        {{ form.alinhamento|add_class:"form-select" }}
                     </div>
                 </div>
 
                 <!-- Descrição -->
                 <div class="col-md-12">
-                    <label for="descricao" class="form-label">
+                    <label for="id_descricao" class="form-label">
                         <i class="fas fa-info-circle"></i> Descrição
                     </label>
                     <div class="input-group">
-                        {{ form.descricao }}
+                        {{ form.descricao|add_class:"form-control" }}
                     </div>
                 </div>
 
-                <!-- Poderes -->
+                <!-- Poderes (Dropdown) -->
                 <div class="col-md-12">
-                    <label for="poderes" class="form-label">
+                    <label for="id_poderes" class="form-label">
                         <i class="fas fa-magic"></i> Poderes
                     </label>
                     <div class="input-group">
-                        {{ form.poderes }}  
+                        {{ form.poderes|add_class:"form-select" }}
                     </div>
                 </div>
 
-
                 <!-- Foto -->
                 <div class="col-md-6">
-                    <label for="foto" class="form-label">
+                    <label for="id_foto" class="form-label">
                         <i class="fas fa-camera"></i> Foto
                     </label>
                     <div class="input-group">
-                        {{ form.foto }}
+                        {{ form.foto|add_class:"form-control" }}
                     </div>
                 </div>
 
                 <!-- Pontos de Combate -->
                 <div class="col-md-6">
-                    <label for="pontosDeCombate" class="form-label">
+                    <label for="id_pontosDeCombate" class="form-label">
                         <i class="fas fa-fist-raised"></i> Pontos de Combate
                     </label>
                     <div class="input-group">
-                        {{ form.pontosDeCombate }}
+                        {{ form.pontosDeCombate|add_class:"form-control" }}
                     </div>
                 </div>
 
                 <!-- Criador -->
                 <div class="col-md-6">
-                    <label for="criador" class="form-label">
+                    <label for="id_criador" class="form-label">
                         <i class="fas fa-user-edit"></i> Criador
                     </label>
                     <div class="input-group">
-                        {{ form.criador }}
+                        {{ form.criador|add_class:"form-control" }}
+                    </div>
+                </div>
+
+                <!-- Favorito -->
+                <div class="col-md-12">
+                    <label for="id_favorito" class="form-label">
+                        <i class="fas fa-star"></i> Favorito
+                    </label>
+                    <div class="input-group">
+                        {{ form.favorito|add_class:"form-check" }}
                     </div>
                 </div>
             </div>
 
-            <!-- Favorito -->
-            <div class="col-md-12">
-                <label for="descricao" class="form-label">
-                    <i class="fas fa-info-circle"></i> Favorito
-                </label>
-                <div class="input-group">
-                    {{ form.favorito }}
-                </div>
-            </div>
-
-            <div class="d-flex justify-content-center mt-5">
+            <!-- Botão de submissão -->
+            <div class="d-flex justify-content-center mt-4">
                 <button type="submit" class="btn btn-success btn-lg">
                     <i class="fas fa-check-circle"></i> Cadastrar
                 </button>
@@ -124,6 +124,6 @@
     </div>
 </div>
 
-<!-- FontAwesome para adicionar ícones -->
+<!-- FontAwesome para ícones -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 {% endblock %}

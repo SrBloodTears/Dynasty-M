@@ -1,14 +1,15 @@
 from django.views.generic import View, ListView, CreateView, UpdateView, DeleteView
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
-from django.http import FileResponse, Http404, JsonResponse
+from django.http import FileResponse, Http404
+from rest_framework.permissions import IsAuthenticated
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from persona.models import Personagem
 from persona.form import FormularioPersona
 from persona.serializers import SerializadorPersona
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import ListAPIView, DestroyAPIView
 from rest_framework.views import APIView
 from rest_framework import permissions, status
 from rest_framework.authentication import TokenAuthentication
@@ -104,7 +105,18 @@ class APIListarPersonagens(ListAPIView):
     serializer_class = SerializadorPersona
     authentication_classes = [TokenAuthentication]
     permission_classes = [permissions.IsAuthenticated]
+    def get_queryset(self):
+        return Personagem.objects.all()
+
+    
+
+class APIDeletarPersonagens(DestroyAPIView):
+    """
+    View para deletar instâncias de personagens (por meio da API REST)
+    """
+    serializer_class = SerializadorPersona
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
         return Personagem.objects.all()
-    
